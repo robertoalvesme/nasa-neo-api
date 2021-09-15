@@ -1,14 +1,22 @@
 package br.com.rhfactor.nasaneoapi.services;
 
 import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
+import br.com.rhfactor.nasaneoapi.dtos.PotentiallyHazardousAsteroid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 @Service
+@Validated
 public class NasaRequestServiceImpl implements NasaRequestService {
 
     private final String PATH = "/feed";
@@ -18,6 +26,26 @@ public class NasaRequestServiceImpl implements NasaRequestService {
 
     @Value("${nasa.api.key}")
     private String key;
+
+    @Override
+    public List<PotentiallyHazardousAsteroid> getListOfPotentiallyHazardousAsteroid(@NotNull LocalDate selectedDate) {
+
+        String strSelectedDate = getConvertedDate( selectedDate );
+        NasaResponse response = getPotentiallyHazardousAsteroid(strSelectedDate, strSelectedDate).getBody();
+
+        if( response.hasPotentiallyHazardousAsteroidCloseToEarth() ){
+            throw new RuntimeException("not found");
+        }
+
+
+
+
+        return null;
+    }
+
+    private String getConvertedDate(LocalDate selectedDate) {
+        return selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 
     /**
      * Receberemos o dia inicial e o dia final.

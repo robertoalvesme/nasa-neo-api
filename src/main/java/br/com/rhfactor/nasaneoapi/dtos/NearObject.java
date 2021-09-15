@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder(toBuilder = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -21,6 +22,9 @@ public class NearObject {
 
     @JsonProperty("name")
     String name;
+
+    @JsonProperty("is_potentially_hazardous_asteroid")
+    Boolean potentiallyHazardousAsteroid;
 
     @JsonProperty("close_approach_data")
     List<CloseApproachData> approachList = new ArrayList<>();

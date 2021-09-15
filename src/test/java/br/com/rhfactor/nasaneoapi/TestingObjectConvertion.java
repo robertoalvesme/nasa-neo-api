@@ -67,14 +67,17 @@ public class TestingObjectConvertion {
         assertThat(nearObjects, allOf(
                 hasSize(6)
                 , everyItem(
-                    hasProperty("approachList", allOf(
-                            hasSize(greaterThanOrEqualTo(1))
-                            , everyItem(
-                                    hasProperty("relativeVelocity", allOf(
-                                            IsMapContaining.hasKey("kilometers_per_hour")
-                                    ))
-                            )
-                    ))
+                        allOf(
+                                hasProperty("potentiallyHazardousAsteroid")
+                            , hasProperty("approachList", allOf(
+                                    hasSize(greaterThanOrEqualTo(1))
+                                    , everyItem(
+                                            hasProperty("relativeVelocity", allOf(
+                                                    IsMapContaining.hasKey("kilometers_per_hour")
+                                            ))
+                                    )
+                            ))
+                        )
                 )
         ));
 

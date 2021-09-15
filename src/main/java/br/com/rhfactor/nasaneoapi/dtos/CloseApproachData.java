@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Data
+@Builder(toBuilder = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -35,4 +33,7 @@ public class CloseApproachData {
     @JsonProperty("orbiting_body")
     String orbitingBody;
 
+    public boolean isCloseToEarth() {
+        return orbitingBody.equals("Earth");
+    }
 }
