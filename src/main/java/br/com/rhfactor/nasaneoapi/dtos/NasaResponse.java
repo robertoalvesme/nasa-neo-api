@@ -1,5 +1,6 @@
 package br.com.rhfactor.nasaneoapi.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -7,17 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NasaResponse {
 
-    /**
-     * "links": {
-     *     "next": "http://www.neowsapp.com/rest/v1/feed?start_date=1986-07-04&end_date=1986-07-04&detailed=false&api_key=IoXbCTZeb4J8ZMAIt5NQKBiBF7jJc4PcvO8HCF63",
-     *     "prev": "http://www.neowsapp.com/rest/v1/feed?start_date=1986-07-02&end_date=1986-07-02&detailed=false&api_key=IoXbCTZeb4J8ZMAIt5NQKBiBF7jJc4PcvO8HCF63",
-     *     "self": "http://www.neowsapp.com/rest/v1/feed?start_date=1986-07-03&end_date=1986-07-03&detailed=false&api_key=IoXbCTZeb4J8ZMAIt5NQKBiBF7jJc4PcvO8HCF63"
-     *  }
-     */
-//    @JsonProperty("links")
-//    List<HashMap<String,String>> links;
 
     /**
      * "element_count": 6
@@ -29,8 +22,8 @@ public class NasaResponse {
      * A data é o Key
      * O valor são as informações recebidas
      */
-//    @JsonProperty("near_earth_objects")
-//    List<HashMap<String,List<NearObject>>> nearObjects;
+    @JsonProperty("near_earth_objects")
+    HashMap<String,List<NearObject>> nearObjects;
 
 
 }
