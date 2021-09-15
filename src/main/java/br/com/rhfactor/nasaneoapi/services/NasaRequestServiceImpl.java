@@ -1,5 +1,6 @@
 package br.com.rhfactor.nasaneoapi.services;
 
+import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -28,13 +29,13 @@ public class NasaRequestServiceImpl implements NasaRequestService {
      * @return
      */
     @Override
-    public ResponseEntity<String> getPotentiallyHazardousAsteroid(String startDate, String endDate){
+    public ResponseEntity<NasaResponse> getPotentiallyHazardousAsteroid(String startDate, String endDate){
 
         // https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-01-01&api_key=IoXbCTZeb4J8ZMAIt5NQKBiBF7jJc4PcvO8HCF63
         return this.restTemplate.exchange( PATH.concat( "?start_date={startDate}&end_date={endDate}&api_key={key}" )
                         , HttpMethod.GET
                         , null
-                        , String.class
+                        , NasaResponse.class
                         , startDate
                         , endDate
                         , key);

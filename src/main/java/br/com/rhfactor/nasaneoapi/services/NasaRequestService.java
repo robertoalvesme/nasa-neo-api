@@ -1,9 +1,10 @@
 package br.com.rhfactor.nasaneoapi.services;
 
+import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface NasaRequestService {
 
-    ResponseEntity<String> getPotentiallyHazardousAsteroid(String startDate, String endDate);
+    ResponseEntity<NasaResponse> getPotentiallyHazardousAsteroid(String startDate, String endDate);
 
 }
