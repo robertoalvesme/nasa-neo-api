@@ -1,12 +1,7 @@
 package br.com.rhfactor.nasaneoapi;
 
 import br.com.rhfactor.nasaneoapi.dtos.SignupForm;
-import br.com.rhfactor.nasaneoapi.repositories.CredentialRepository;
 import br.com.rhfactor.nasaneoapi.services.CredentialService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 //@Component
 public class Initialization {

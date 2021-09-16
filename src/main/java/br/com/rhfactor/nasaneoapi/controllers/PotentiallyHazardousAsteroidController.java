@@ -3,7 +3,6 @@ package br.com.rhfactor.nasaneoapi.controllers;
 import br.com.rhfactor.nasaneoapi.dtos.PotentiallyHazardousAsteroid;
 import br.com.rhfactor.nasaneoapi.services.NasaRequestService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
