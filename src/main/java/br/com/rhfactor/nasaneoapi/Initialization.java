@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
+//@Component
 public class Initialization {
 
-    @Autowired private CredentialService credentialService;
+//    @Autowired
+    private CredentialService credentialService;
 
-    @PostConstruct
+//    @PostConstruct
     public void createAdminUser(){
         if( !credentialService.existsByUsername( "admin@test.com.br" ) ){
             credentialService.create( SignupForm.builder()

@@ -1,5 +1,6 @@
 package br.com.rhfactor.nasaneoapi.services;
 
+import br.com.rhfactor.nasaneoapi.H2DatabaseTest;
 import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@H2DatabaseTest
 @SpringBootTest
 class NasaRequestServiceTest {
 

@@ -1,5 +1,6 @@
 package br.com.rhfactor.nasaneoapi.controllers;
 
+import br.com.rhfactor.nasaneoapi.H2DatabaseTest;
 import br.com.rhfactor.nasaneoapi.dtos.JwtResponse;
 import br.com.rhfactor.nasaneoapi.dtos.SignupForm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +20,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 
 @SpringBootTest
+@H2DatabaseTest
 @AutoConfigureMockMvc
 @WithAnonymousUser
 class AuthenticationControllerTest {

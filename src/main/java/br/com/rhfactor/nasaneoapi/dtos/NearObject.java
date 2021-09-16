@@ -27,6 +27,7 @@ public class NearObject {
     Boolean potentiallyHazardousAsteroid;
 
     @JsonProperty("close_approach_data")
+    @Builder.Default
     List<CloseApproachData> approachList = new ArrayList<>();
 
 
