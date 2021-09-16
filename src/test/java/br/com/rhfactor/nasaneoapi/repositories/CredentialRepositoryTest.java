@@ -1,5 +1,6 @@
 package br.com.rhfactor.nasaneoapi.repositories;
 
+import br.com.rhfactor.nasaneoapi.H2DatabaseTest;
 import br.com.rhfactor.nasaneoapi.domains.Credential;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @DataJpaTest
-//@H2DatabaseTest
+@H2DatabaseTest
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 class CredentialRepositoryTest {
 

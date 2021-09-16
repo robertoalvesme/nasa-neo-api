@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql:5.6.34
+    container_name: "mysql-test-environment"
+    environment:
+      MYSQL_DATABASE: nasa_api
+      MYSQL_USER: root
+      MYSQL_PASSWORD: AZs4buJS6F
+      MYSQL_ROOT_PASSWORD: AZs4buJS6F
+    ports:
+      - 3306:3306
+#    volumes:
+#      - .docker-storage/mysql/mysql-data:/var/lib/mysql

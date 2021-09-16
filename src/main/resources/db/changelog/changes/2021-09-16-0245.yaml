@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create user access
+      author: roberto alves
+      changes:
+
+        - createTable:
+            tableName: credential
+            columns:
+              - column:
+                  name: id
+                  type: bigint unsigned
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: bit(1)
+                  constraints:
+                    nullable: false
+                    defaultValueBoolean: 1
+
+        - addUniqueConstraint:
+            tableName: credential
+            constraintName: UN_credential_username
+            columnNames: username
+
+
+
+
