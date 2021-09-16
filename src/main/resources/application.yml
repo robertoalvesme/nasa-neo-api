@@ -1,7 +1,27 @@
 server:
   port: ${PORT:5000}
 
+jwt:
+  secret: request-api-http
+  expiration: 60000000
+  refreshExpirationDateInMs: 9000000
+
 nasa:
   api:
     url: https://api.nasa.gov/neo/rest/v1
     key: IoXbCTZeb4J8ZMAIt5NQKBiBF7jJc4PcvO8HCF63
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    driverClassName: org.h2.Driver
+    hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+    naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    tomcat:
+      testOnBorrow: true
+      validationQuery: SELECT 1

@@ -4,6 +4,8 @@ import br.com.rhfactor.nasaneoapi.dtos.CloseApproachData;
 import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
 import br.com.rhfactor.nasaneoapi.dtos.NearObject;
 import br.com.rhfactor.nasaneoapi.dtos.PotentiallyHazardousAsteroid;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,11 +33,14 @@ class NasaRequestServiceImplTest {
     @Mock
     private RestTemplate restTemplate;
 
+    @Mock
+    private ObjectMapper objectMapper;
+
     @InjectMocks
     private NasaRequestService service = new NasaRequestServiceImpl();
 
     @Test
-    void getListOfPotentiallyHazardousAsteroid() {
+    void getListOfPotentiallyHazardousAsteroid() throws JsonProcessingException {
 
         ResponseEntity<NasaResponse> responseEntity = new ResponseEntity<NasaResponse>(
                 getNasaResponse(),
