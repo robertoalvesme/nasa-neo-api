@@ -2,6 +2,9 @@ package br.com.rhfactor.nasaneoapi.services;
 
 import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
 import br.com.rhfactor.nasaneoapi.dtos.PotentiallyHazardousAsteroid;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -16,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @Validated
 public class NasaRequestServiceImpl implements NasaRequestService {
@@ -25,23 +29,27 @@ public class NasaRequestServiceImpl implements NasaRequestService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Value("${nasa.api.key}")
     private String key;
 
     @Override
-    public List<PotentiallyHazardousAsteroid> getListOfPotentiallyHazardousAsteroid(@NotNull LocalDate selectedDate) {
+    public List<PotentiallyHazardousAsteroid> getListOfPotentiallyHazardousAsteroid(@NotNull LocalDate selectedDate) throws JsonProcessingException {
 
         String strSelectedDate = getDateAsString( selectedDate );
-        NasaResponse response = getPotentiallyHazardousAsteroid(strSelectedDate, strSelectedDate).getBody();
+        ResponseEntity<NasaResponse> call = getPotentiallyHazardousAsteroid(strSelectedDate, strSelectedDate);
+        log.info("Request result {} , {} ", call.getStatusCode() , objectMapper.writeValueAsString(call.getBody()) );
 
 
+        NasaResponse response = call.getBody();
         // Não chamar o método da classe porque logo abaixo iremos executar ele novamente
         if( response.getNearObjects() == null || response.getNearObjects().size() <= 0 ){
             throw new RuntimeException("not found");
         }
 
         // Transformar na lista de data, id, nome, etc..
-
         List<PotentiallyHazardousAsteroid> potentialList = new ArrayList<>();
 
         response.getPotentiallyHazardousAsteroidCloseToEarth().entrySet().forEach( date -> {
@@ -56,6 +64,8 @@ public class NasaRequestServiceImpl implements NasaRequestService {
                          });
                      });
         });
+
+        if( potentialList.size() == 0 ) throw new RuntimeException("not found");
 
         return potentialList;
     }

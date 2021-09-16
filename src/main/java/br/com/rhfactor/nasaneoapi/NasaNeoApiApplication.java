@@ -1,5 +1,6 @@
 package br.com.rhfactor.nasaneoapi;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +24,11 @@ public class NasaNeoApiApplication {
         return new RestTemplateBuilder()
                 .rootUri( nasaUrl )
                 .build();
+    }
 
+    @Bean
+    public ObjectMapper getDefaultObjectMapper(){
+        return new ObjectMapper();
     }
 
 }
