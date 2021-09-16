@@ -7,6 +7,7 @@ import br.com.rhfactor.nasaneoapi.services.CredentialService;
 import br.com.rhfactor.nasaneoapi.services.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,10 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping(AuthenticationController.PATH)
 public class AuthenticationController {
+
+    public static final String PATH = "/api/auth";
 
     @Autowired private CredentialService credentialService;
     @Autowired private LoginService loginService;
@@ -27,14 +30,10 @@ public class AuthenticationController {
         return loginService.authenticate( loginRequest );
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("signup")
-    public Boolean signUp( @NotNull @Valid @RequestBody SignupForm signupForm) {
-        try{
-            credentialService.create( signupForm );
-        }catch (Exception e){
-            return false;
-        }
-        return true;
+    public void signUp( @NotNull @Valid @RequestBody SignupForm signupForm) {
+        credentialService.create( signupForm );
     }
 
 
