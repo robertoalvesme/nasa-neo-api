@@ -31,7 +31,7 @@ public class NasaRequestServiceImpl implements NasaRequestService {
     @Override
     public List<PotentiallyHazardousAsteroid> getListOfPotentiallyHazardousAsteroid(@NotNull LocalDate selectedDate) {
 
-        String strSelectedDate = getConvertedDate( selectedDate );
+        String strSelectedDate = getDateAsString( selectedDate );
         NasaResponse response = getPotentiallyHazardousAsteroid(strSelectedDate, strSelectedDate).getBody();
 
 
@@ -44,21 +44,30 @@ public class NasaRequestServiceImpl implements NasaRequestService {
 
         List<PotentiallyHazardousAsteroid> potentialList = new ArrayList<>();
 
+        response.getPotentiallyHazardousAsteroidCloseToEarth().entrySet().forEach( date -> {
+                date.getValue().forEach( nearObject -> {
+                         nearObject.getApproachList().forEach( relativeVelocity -> {
+                             potentialList.add( PotentiallyHazardousAsteroid.builder()
+                                             .date( getDateFromString( date.getKey() ) )
+                                             .id( nearObject.getNeoReferenceId() )
+                                             .kmPerHour( relativeVelocity.getRelativeVelocityKmPerHour() )
+                                             .name( nearObject.getName() )
+                                     .build() );
+                         });
+                     });
+        });
 
-//        response.getPotentiallyHazardousAsteroidCloseToEarth().entrySet().forEach( date -> {
-//            potentialList.add( PotentiallyHazardousAsteroid.builder()
-//                            .date( date.getKey() )
-//                    .build() );
-//        });
-
-
-
-        return null;
+        return potentialList;
     }
 
-    private String getConvertedDate(LocalDate selectedDate) {
+    private String getDateAsString(LocalDate selectedDate) {
         return selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+
+    private LocalDate getDateFromString(String date){
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
 
     /**
      * Receberemos o dia inicial e o dia final.

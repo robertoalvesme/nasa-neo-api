@@ -17,6 +17,6 @@ public class PotentiallyHazardousAsteroid {
     Long id;
     LocalDate date;
     String name;
-    Float kmPerHour;
+    Double kmPerHour;
 
 }

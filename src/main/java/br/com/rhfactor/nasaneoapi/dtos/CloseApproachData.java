@@ -36,4 +36,8 @@ public class CloseApproachData {
     public boolean isCloseToEarth() {
         return orbitingBody.equals("Earth");
     }
+
+    public Double getRelativeVelocityKmPerHour(){
+        return relativeVelocity.get("kilometers_per_hour").doubleValue();
+    }
 }
