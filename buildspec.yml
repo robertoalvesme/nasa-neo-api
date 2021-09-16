@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo "Iniciando compilação"
+  build:
+    commands:
+      - echo "Cler no projeto"
+      - gradle clean
+      - echo "Testar projeto"
+      - gradle test
+  post_build:
+    commands:
+      - echo "Iniciar empacotamento"
+      - gradle build
+      - echo "Mover arquivos"
+      - mv build/libs/*.jar nasa-api.jar
+artifacts:
+  files:
+    - nasa-api.jar
