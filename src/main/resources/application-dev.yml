@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/nasa_api?useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: AZs4buJS6F
