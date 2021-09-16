@@ -18,15 +18,11 @@ class NasaRequestServiceTest {
 
     @Test
     void testRequest() {
-
         ResponseEntity<NasaResponse> response = service.getPotentiallyHazardousAsteroid("1986-07-03", "1986-07-03");
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-
         assertThat(response.getBody(), allOf(
                 hasProperty("elements", equalTo(6))
         ));
-
-
     }
 
 }

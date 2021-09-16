@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,10 +34,22 @@ public class NasaRequestServiceImpl implements NasaRequestService {
         String strSelectedDate = getConvertedDate( selectedDate );
         NasaResponse response = getPotentiallyHazardousAsteroid(strSelectedDate, strSelectedDate).getBody();
 
-        if( response.hasPotentiallyHazardousAsteroidCloseToEarth() ){
+
+        // Não chamar o método da classe porque logo abaixo iremos executar ele novamente
+        if( response.getNearObjects() == null || response.getNearObjects().size() <= 0 ){
             throw new RuntimeException("not found");
         }
 
+        // Transformar na lista de data, id, nome, etc..
+
+        List<PotentiallyHazardousAsteroid> potentialList = new ArrayList<>();
+
+
+//        response.getPotentiallyHazardousAsteroidCloseToEarth().entrySet().forEach( date -> {
+//            potentialList.add( PotentiallyHazardousAsteroid.builder()
+//                            .date( date.getKey() )
+//                    .build() );
+//        });
 
 
 
