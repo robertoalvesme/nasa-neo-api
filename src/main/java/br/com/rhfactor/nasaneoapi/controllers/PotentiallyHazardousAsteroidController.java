@@ -19,8 +19,10 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/potentially-hazardous-asteroid")
+@RequestMapping(PotentiallyHazardousAsteroidController.PATH)
 public class PotentiallyHazardousAsteroidController {
+
+    public static final String PATH = "/api/v1/potentially-hazardous-asteroid";
 
     @Autowired
     private NasaRequestService nasaRequestService;

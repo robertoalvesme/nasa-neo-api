@@ -12,4 +12,5 @@ public interface CredentialService {
     @Transactional
     Credential create(@NotNull @Valid SignupForm signupForm);
 
+    boolean existsByUsername(String username);
 }

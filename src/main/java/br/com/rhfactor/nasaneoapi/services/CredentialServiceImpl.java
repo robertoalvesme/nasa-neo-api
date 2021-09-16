@@ -27,7 +27,7 @@ public class CredentialServiceImpl implements CredentialService {
     @Override
     public Credential create(@NotNull @Valid SignupForm signupForm) {
 
-        if( credentialRepository.findByUsername( signupForm.getUsername() ).isPresent() ){
+        if( existsByUsername( signupForm.getUsername() ) ){
             throw new IllegalArgumentException("Duplicated credential");
         }
 
@@ -35,6 +35,11 @@ public class CredentialServiceImpl implements CredentialService {
                         .username( signupForm.getUsername() )
                         .password( passwordEncoder.encode( signupForm.getPassword() ) )
                 .build() );
+    }
+
+    @Override
+    public boolean existsByUsername( String username ){
+        return credentialRepository.existsByUsername( username );
     }
 
 
