@@ -6,10 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -26,6 +24,7 @@ public class PotentiallyHazardousAsteroidController {
     @Autowired
     private NasaRequestService nasaRequestService;
 
+    // TODO: No erro deve retornar 400 está retornando 500
     @GetMapping("{date}")
     public List<PotentiallyHazardousAsteroid> getPotentiallyHazardousAsteroidController(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") @NotNull LocalDate selectedDate) throws JsonProcessingException {
         // Deve retornar 404 se não houver

@@ -2,6 +2,7 @@ package br.com.rhfactor.nasaneoapi.services;
 
 import br.com.rhfactor.nasaneoapi.dtos.NasaResponse;
 import br.com.rhfactor.nasaneoapi.dtos.PotentiallyHazardousAsteroid;
+import br.com.rhfactor.nasaneoapi.exceptions.PotentiallyHazardousAsteroidNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +47,7 @@ public class NasaRequestServiceImpl implements NasaRequestService {
         NasaResponse response = call.getBody();
         // Não chamar o método da classe porque logo abaixo iremos executar ele novamente
         if( response.getNearObjects() == null || response.getNearObjects().size() <= 0 ){
-            throw new RuntimeException("not found");
+            throw new PotentiallyHazardousAsteroidNotFoundException();
         }
 
         // Transformar na lista de data, id, nome, etc..
@@ -65,7 +66,7 @@ public class NasaRequestServiceImpl implements NasaRequestService {
                      });
         });
 
-        if( potentialList.size() == 0 ) throw new RuntimeException("not found");
+        if( potentialList.size() == 0 ) throw new PotentiallyHazardousAsteroidNotFoundException();
 
         return potentialList;
     }
