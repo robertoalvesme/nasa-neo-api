@@ -1,6 +1,7 @@
 package br.com.rhfactor.nasaneoapi.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,8 +16,12 @@ import java.time.LocalDate;
 public class PotentiallyHazardousAsteroid {
 
     Long id;
+
     LocalDate date;
+
     String name;
+
+    @JsonProperty("kmPerHour")
     Double kmPerHour;
 
 }
