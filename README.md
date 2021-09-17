@@ -8,4 +8,5 @@ https://documenter.getpostman.com/view/1549386/U16qHMw9#fe205ae7-0678-4f1f-b885-
 - https://elastic-yalow-ce9891.netlify.app/
 
 ## Backend
+P.S. O Backend demora para subir, portanto a primeira requisição sempre falha.
 https://nasa-neo-api-prod.herokuapp.com/
